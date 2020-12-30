@@ -1,9 +1,6 @@
-EXPENSES = open('input.txt', 'r')
-expenses_array = EXPENSES.read().splitlines()
-ledger = set()
-
 
 def findProduct(total, expenses, start=0):
+    ledger = set()
     """Get the product of the two numbers that add to the total"""
     for idx, expense in enumerate(expenses, start):
         expense_int = int(expense)
@@ -23,6 +20,3 @@ def findTripleProduct(total, expenses):
 
         if (remainderProduct):
             return remainderProduct*expense_int
-
-
-print(findTripleProduct(2020, expenses_array))
