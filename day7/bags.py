@@ -1,3 +1,13 @@
+# This is scary inefficent.
+# Space complexity is O(n) for uknown_bags (can take 3x space\) + bags_with_type + bags_without type
+# Time complexity is
+# Initial process bags:
+#   O(n) (intial_process_bags)
+# * Process_bag
+#   [2*O(k) length of string + O(2) for inner bags]
+# + reprocess_bags
+# O(n^2) * (O(n^2 + n) = O(n^4)
+
 import re
 
 
@@ -46,8 +56,8 @@ def intial_process_bags(array_of_bags, bag_type, num_bags=1):
 
 def reprocess_bags(unknown_bags={}, bags_with_type=set(), bags_without_type=set()):
     newly_known_bags = set()
-    while len(unknown_bags):
-        for bag_name, bag_contents in unknown_bags.items():
+    while len(unknown_bags):  # Worst case O(n - 2) + O(n-3) + O(n-4)
+        for bag_name, bag_contents in unknown_bags.items():  # Worst case O(n-2) + O(n-3) + O(n-4)
             still_unknown = False
             has_type = False
             for inner_bag in bag_contents:
@@ -64,6 +74,6 @@ def reprocess_bags(unknown_bags={}, bags_with_type=set(), bags_without_type=set(
                 if not has_type:
                     bags_without_type.add(bag_name)
 
-        for newly_known_bag in newly_known_bags:
+        for newly_known_bag in newly_known_bags:  # Worst case 1 + 1 + 1
             del unknown_bags[newly_known_bag]
         newly_known_bags.clear()
